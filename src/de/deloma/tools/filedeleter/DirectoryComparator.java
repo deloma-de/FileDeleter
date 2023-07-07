@@ -6,6 +6,7 @@ import java.util.Comparator;
  * A comperator for the Class Ordner
  * 
  * @author Sezin Maden
+ * @author Amirhossein Vatani 2023
  */
 public class DirectoryComparator implements Comparator<Ordner>
 {

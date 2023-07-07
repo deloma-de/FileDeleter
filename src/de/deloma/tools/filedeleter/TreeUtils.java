@@ -2,6 +2,10 @@ package de.deloma.tools.filedeleter;
 
 import javafx.scene.control.TreeItem;
 
+/**
+ * @author Amirhossein Vatani 2023
+ */
+
 public class TreeUtils 
 {
 	
@@ -23,6 +27,7 @@ public class TreeUtils
 	
 	public static <T> void optimizeNode(TreeItem<T> node)
 	{
+	
 	    for (TreeItem<T> child : node.getChildren()) {
 	        optimizeNode(child);
 	    }
@@ -36,6 +41,6 @@ public class TreeUtils
 
 	    }
 	    
-	    
-}
+
+	 }
 }

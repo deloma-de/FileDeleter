@@ -104,11 +104,29 @@ public class OrdnerDaoImpl implements OrdnerDao
 	public void deleteOrdner(final Ordner ordner)
 	{
 		final Set<Ordner> ordnerSet = this.getAllOrdner();
-		/*
-		 * if (!ordnerSet.contains(ordner)) { throw new
-		 * IllegalArgumentException("The ordner is not in the set!"); }
-		 */
-		ordnerSet.remove(ordner);
+	
+		
+		//  remove all child directory if selected item is parebt
+		
+		// ordner -> H:\test	
+		 Set<Ordner> childOrdners = new HashSet<>();
+		 
+	 	// find existingOrdner in ordnerSet  -> H:\test\filedeleter
+	    for (Ordner existingOrdner : ordnerSet) {
+	    	
+	    	/*
+	    	 * H:\test\filedeleter start With  H:\test 
+	    	 * So it's  H:\test\filedeleter a child of H:\test
+	    	 */	    	
+	        if (existingOrdner.getPfad().startsWith(ordner.getPfad())) {
+	        	
+	        	childOrdners.add(existingOrdner);
+	        }
+	    }
+	    
+	    
+		ordnerSet.removeAll(childOrdners);
+		
 		this.writeSet(ordnerSet);
 
 	}

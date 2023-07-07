@@ -37,6 +37,7 @@ import javafx.scene.text.FontWeight;
  * Controler class for the GUI
  * 
  * @author Sezin Maden
+ * @author Amirhossein Vatani 2023
  */
 public class Controler implements Initializable
 {
@@ -92,10 +93,16 @@ public class Controler implements Initializable
       	// add ordner to root
 	     ordSet.forEach(o -> Controler.addOrdner(root,o));
 	    
-	     TreeUtils.optimizeNode(root);
-	   
+	    TreeUtils.optimizeNode(root);
 	    this.treeView.setRoot(root);
-		this.treeView.setShowRoot(false);
+	    treeView.setShowRoot(false);
+	    
+	   // the last parent is root and it must be shown 
+        if(!(root.getValue().toString().equals(""))) {
+        	treeView.setShowRoot(true);
+        }
+        
+		
 
 		// select listener
 		this.treeView.getSelectionModel().selectedItemProperty().addListener((ChangeListener<TreeItem<Ordner>>) (observable, oldValue, newValue) -> {
@@ -124,14 +131,14 @@ public class Controler implements Initializable
 	    treeView.setCellFactory(param -> new CheckBoxTreeCell<Ordner>() {
 	        @Override
 	        public void updateItem(Ordner ordner, boolean empty) {
-	            super.updateItem(ordner, empty);
-
+	            super.updateItem(ordner, empty);	            
+	            
 	            if (empty || ordner == null) {
 	                setText(null);
 	            } else {
 	            	
-	                TreeItem<Ordner> item = this.getTreeItem();
-	                
+	                TreeItem<Ordner> item = this.getTreeItem();	               
+		            	   
 	                ordner.setConfig(item.isLeaf() ? true : false);
 	                
 	                setFont(Font.font(null, (item.isLeaf() ? FontWeight.BOLD : FontWeight.NORMAL) , USE_PREF_SIZE));
@@ -139,16 +146,19 @@ public class Controler implements Initializable
 	                if (!item.isLeaf()) {
 	                    setTextFill(Color.GRAY);
 	                }
-	                
-	               if(!(item.getParent().getValue().toString().equals("")))
-	                	 setText(ordner.getName());
 
+	                if(!(item.getParent() == null)) {	     	                	
+	                	if(!(item.getParent().getValue().toString().equals(""))) {
+	 	            	   setText(ordner.getName());
+	                	}		           
+	                }
+	                
 	                	
-	             /*   System.out.println("item : " +item);
+	              /*  System.out.println("item : " +item);
 	                System.out.println("isLeaf : " +item.isLeaf());
 	                System.out.println("getParent().getValue() : " + item.getParent().getValue());
 	                System.out.println("getParent().isConfig() : " + item.getValue().isConfig());         
-	                System.out.println("-------------------------" ); */
+	                System.out.println("-------------------------" );  */
   	               	                
 	            }
 	        }
@@ -157,7 +167,7 @@ public class Controler implements Initializable
 	
 	public static void addOrdner(TreeItem<Ordner> root, Ordner ordner)
 	{
-		
+
 		// H:/test/filedeleter
 		String pfad = ordner.getPfad();
 		
@@ -205,13 +215,16 @@ public class Controler implements Initializable
 				
 				if (ordner.equals(fullPathOrdner))
 					ordnerItem.setSelected(ordner.isActive());
-	
+				
 				parentItem.getChildren().add(ordnerItem);
+				
 			}
 			
 			
 			
 		}
+		
+
 	}
 	
 
@@ -380,9 +393,9 @@ public class Controler implements Initializable
 	 */
 	public void removeFile()
 	{
-
+		// remove directory
 		final Ordner ord = this.treeView.getSelectionModel().selectedItemProperty().getValue().getValue();
-
+		
 		final OrdnerDaoImpl dao = new OrdnerDaoImpl(Controler.CONFIG);
 		dao.deleteOrdner(ord);
 

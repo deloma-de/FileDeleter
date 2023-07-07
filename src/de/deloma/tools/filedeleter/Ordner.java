@@ -4,6 +4,7 @@ package de.deloma.tools.filedeleter;
  * Representation of a diractory
  *
  * @author Sezin Maden
+ * @author Amirhossein Vatani 2023
  */
 public class Ordner implements Comparable<Ordner>
 {

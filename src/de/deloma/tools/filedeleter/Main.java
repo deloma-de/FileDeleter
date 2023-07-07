@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * Main class launches stage
  *
  * @author Sezin Maden
+ * @author Amirhossein Vatani 2023
  */
 public class Main extends Application
 {

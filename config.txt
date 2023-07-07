@@ -1,4 +1,5 @@
-true,D:\
-true,D:\test
-true,D:\test\abc
-true,D:\test\def
+true,H:\deloma\deloma 1
+true,H:\deloma\deloma 2
+true,H:\deloma\deloma 3
+false,D:\test\abc
+false,D:\test\def
