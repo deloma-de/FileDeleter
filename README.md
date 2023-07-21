@@ -1,11 +1,8 @@
 
 # FileDeleter
 
-The FileDeleter Tool is an application designed to delete files from multiple folders simultaneously. It is particularly useful for clearing application-generated files and cache folders from domains on application servers like GlassFish.
-
 ## Description
-
-Use this tool at your own risk. Always ensure you have backups of important files before performing cleanup operations.
+The FileDeleter Tool is an application designed to delete files from multiple folders simultaneously. It is particularly useful for clearing application-generated files and cache folders from domains on application servers like GlassFish.
 
 ## Features
 
