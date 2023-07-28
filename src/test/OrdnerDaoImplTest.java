@@ -284,7 +284,7 @@ class OrdnerDaoImplTest {
 		 *  -H: 
 		 * 	  --deloma
 		 *  		  ---deloma12 (false)			
-	 	 * 						 ----delomaText4.txt
+	 	 * 						 ----delomaText4.txt dff
 		 */
 		//create Folder H:\\test\\deloma\\deloma_12
 		Ordner deloma12 = TestUtil.getOrdner("H:\\test\\deloma\\deloma_12" , ordSet);
