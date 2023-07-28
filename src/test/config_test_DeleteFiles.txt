@@ -1,0 +1,3 @@
+true,H:\test\deloma\deloma_10
+true,H:\test\deloma\deloma_11
+false,H:\test\deloma\deloma_12

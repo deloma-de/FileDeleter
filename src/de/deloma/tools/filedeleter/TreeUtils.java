@@ -40,7 +40,18 @@ public class TreeUtils
 	        node.getChildren().setAll(child.getChildren()); 
 
 	    }
-	    
-
 	 }
+	
+
+	    public static String getRelativePath(String parentPath, String fullPath) {
+	        
+	        String relativePath = fullPath.substring(parentPath.length());
+
+	        if (relativePath.startsWith("\\") ) {
+	            relativePath = relativePath.substring(1);
+	        }
+	        
+	        return relativePath;
+	    }
+
 }

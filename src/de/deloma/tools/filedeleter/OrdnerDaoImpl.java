@@ -104,27 +104,22 @@ public class OrdnerDaoImpl implements OrdnerDao
 	public void deleteOrdner(final Ordner ordner)
 	{
 		final Set<Ordner> ordnerSet = this.getAllOrdner();
-	
-		
 		//  remove all child directory if selected item is parebt
-		
 		// ordner -> H:\test	
 		 Set<Ordner> childOrdners = new HashSet<>();
 		 
 	 	// find existingOrdner in ordnerSet  -> H:\test\filedeleter
-	    for (Ordner existingOrdner : ordnerSet) {
-	    	
-	    	/*
-	    	 * H:\test\filedeleter start With  H:\test 
-	    	 * So it's  H:\test\filedeleter a child of H:\test
-	    	 */	    	
-	        if (existingOrdner.getPfad().startsWith(ordner.getPfad())) {
-	        	
-	        	childOrdners.add(existingOrdner);
-	        }
-	    }
-	    
-	    
+		    Iterator<Ordner> iterator = ordnerSet.iterator();
+		    while (iterator.hasNext()) {
+		        Ordner existingOrdner = iterator.next();
+		    	/*
+		    	 * H:\test\filedeleter start With  H:\test 
+		    	 * So it's  H:\test\filedeleter a child of H:\test
+		    	 */	 
+		        if (existingOrdner.getPfad().startsWith(ordner.getPfad())) {
+		            childOrdners.add(existingOrdner);
+		        }
+		    }
 		ordnerSet.removeAll(childOrdners);
 		
 		this.writeSet(ordnerSet);
@@ -139,34 +134,52 @@ public class OrdnerDaoImpl implements OrdnerDao
 	@Override
 	public void createOrdner(final Ordner ordner)
 	{
-		// Here will be all folder in a set
+		/*
+		 * 1. 
+		 * 
+		 * config: G:\
+		 * ordner: G:\Test\
+		 * 
+		 * 2.
+		 * 
+		 * config: H:\Test\
+		 * ordner: H:\
+		 */
 		final Set<Ordner> ordnerSet = this.getAllOrdner();
-		
-		//  remove all child folders of the new folder in the set
-		
-		// ordner -> H:\test	
-		 Set<Ordner> childOrdners = new HashSet<>();
-		 
-	 	// find existingOrdner in ordnerSet  -> H:\test\filedeleter
-	    for (Ordner existingOrdner : ordnerSet) {
-	    	
-	    	/*
-	    	 * H:\test\filedeleter start With  H:\test 
-	    	 * So it's  H:\test\filedeleter a child of H:\test
-	    	 */	    	
-	        if (existingOrdner.getPfad().startsWith(ordner.getPfad())) {
-	        	childOrdners.add(existingOrdner);
-	        }
-	    }
+	    Iterator<Ordner> iterator = ordnerSet.iterator();
 	    
-	    // remove child -> H:\test\filedeleter
-	    ordnerSet.removeAll(childOrdners);
-			
-		// Added the folder sent through the param
-		ordnerSet.add(ordner);
-		// The set of all folders will be saved into file
-		this.writeSet(ordnerSet);
+	    while (iterator.hasNext()) {
+	    	
+	    	// 1. G:\
+	    	// 2. H:\Test\
+	        Ordner existingOrdner = iterator.next();	
+	        
+	        // check if ordner is parent
+	        
+	        // 1. G:\ starts with G:\Test\ false
+	        // 2. H:\Test\ starts with H:\ true
+	        boolean existingOrdnerChildOfOrdner = existingOrdner.getPfadSlash().startsWith(ordner.getPfadSlash());
+	        
+	        // check if ordner is child
+	        
+	        // 1. G:\Test\ starts with G:\ true
+	        // 2. H:\ starts with H:\Test\ false
+	        boolean ordnerChildOfExistingOrdner = ordner.getPfadSlash().startsWith(existingOrdner.getPfadSlash());
+	        
+	        
+	        
+	        // if ordner is parent or child - remove existing one
+	        if (existingOrdnerChildOfOrdner|| ordnerChildOfExistingOrdner) 		        	
+	        	iterator.remove();
 
+	       
+	    }
+
+				
+			// Added the folder sent through the param
+			ordnerSet.add(ordner);
+			// The set of all folders will be saved into file
+			this.writeSet(ordnerSet);
 	}
 	
 	
@@ -182,7 +195,7 @@ public class OrdnerDaoImpl implements OrdnerDao
 		// throw IllegalArgumentException("The ordner is not in the set!");
 
 		this.writeSet(ordnerSet);
-
+		System.out.println("Update file : " + ordnerSet );
 	}
 
 	/**

@@ -93,15 +93,13 @@ public class Controler implements Initializable
       	// add ordner to root
 	     ordSet.forEach(o -> Controler.addOrdner(root,o));
 	    
-	    TreeUtils.optimizeNode(root);
-	    this.treeView.setRoot(root);
-	    treeView.setShowRoot(false);
-	    
-	   // the last parent is root and it must be shown 
-        if(!(root.getValue().toString().equals(""))) {
-        	treeView.setShowRoot(true);
-        }
-        
+		    
+	    // optimize nodes (not virtual root node)
+	     root.getChildren().forEach(c ->  TreeUtils.optimizeNode(c));
+
+	   	this.treeView.setRoot(root);
+	    this.treeView.setShowRoot(false);
+
 		
 
 		// select listener
@@ -139,26 +137,42 @@ public class Controler implements Initializable
 	            	
 	                TreeItem<Ordner> item = this.getTreeItem();	               
 		            	   
-	                ordner.setConfig(item.isLeaf() ? true : false);
+	               // ordner.setConfig(item.isLeaf() ? true : false);
 	                
 	                setFont(Font.font(null, (item.isLeaf() ? FontWeight.BOLD : FontWeight.NORMAL) , USE_PREF_SIZE));
 	                
 	                if (!item.isLeaf()) {
 	                    setTextFill(Color.GRAY);
 	                }
-
-	                if(!(item.getParent() == null)) {	     	                	
-	                	if(!(item.getParent().getValue().toString().equals(""))) {
-	 	            	   setText(ordner.getName());
-	                	}		           
-	                }
-	                
+                	
+	                if(!(item.getParent() == null)) {	     	
 	                	
-	              /*  System.out.println("item : " +item);
+	                	if(!(item.getParent().getValue().toString().equals(""))) {
+	                	
+	                		String parentPath = item.getParent().getValue().toString()+"\\" ;  
+	                		String fullPath =  item.getValue().toString() ;  
+	        	         
+	        	         setText(TreeUtils.getRelativePath(parentPath, fullPath));
+	                	} 
+	                	
+	                	
+	                	 /*  if(!(item.getParent().getValue().toString().equals(""))) 
+	                	   {
+	 	            	   setText(ordner.getName());
+	                		}	 */
+	                	 
+	                }       
+
+	                  	       
+	                  	
+	                /*      System.out.println("item : " +item);
+	                System.out.println("item.getChildren : " +item.getChildren());
 	                System.out.println("isLeaf : " +item.isLeaf());
 	                System.out.println("getParent().getValue() : " + item.getParent().getValue());
 	                System.out.println("getParent().isConfig() : " + item.getValue().isConfig());         
-	                System.out.println("-------------------------" );  */
+	                System.out.println("-------------------------" );   */
+	                	
+
   	               	                
 	            }
 	        }

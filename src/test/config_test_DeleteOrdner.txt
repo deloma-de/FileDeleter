@@ -1,0 +1,3 @@
+true,G:\deloma\deloma_4
+true,G:\deloma\deloma_5
+true,G:\deloma\deloma_6

@@ -8,7 +8,8 @@ package de.deloma.tools.filedeleter;
  */
 public class Ordner implements Comparable<Ordner>
 {
-
+	private static final String FOLDER_DELIMITER = "\\";
+	
 	/**
 	 * path of the directory
 	 * 
@@ -52,6 +53,11 @@ public class Ordner implements Comparable<Ordner>
 	public String getPfad()
 	{
 		return this.pfad;
+	}
+	
+	public String getPfadSlash()
+	{
+		return this.pfad + FOLDER_DELIMITER;
 	}
 
 	public void setPfad(final String pfad)
@@ -115,7 +121,7 @@ public class Ordner implements Comparable<Ordner>
 	{
 		// H:/test/filedeleter
 		
-		int lastPathSeparatorIdx = this.pfad.lastIndexOf("\\");
+		int lastPathSeparatorIdx = this.pfad.lastIndexOf(FOLDER_DELIMITER);
 		
 		// H:/test
 		if (lastPathSeparatorIdx != -1)
@@ -127,7 +133,7 @@ public class Ordner implements Comparable<Ordner>
 	public String getName() {
 		// H:/test/filedeleter
 		
-		int lastPathSeparatorIdx = this.pfad.lastIndexOf("\\");
+		int lastPathSeparatorIdx = this.pfad.lastIndexOf(FOLDER_DELIMITER);
 		
 		// filedeleter
 		if (lastPathSeparatorIdx != -1)
