@@ -226,86 +226,77 @@ class OrdnerDaoImplTest {
 		File folderDeloma10 = new File(deloma10.getPfad());
 		TestUtil.createSysFolder(folderDeloma10);
 		
+		
 			//create File H:\\test\\deloma\\deloma_10\\delomaText1.txt
 			File delomaText1 = new File("H:\\test\\deloma\\deloma_10\\delomaText1.txt");
 			TestUtil.createSysFile(delomaText1);
 			
-			// test delete deloma_10 
+			/*
+			 * Second scenario:
+			 *  -H: 
+			 * 	  --deloma
+			 * 			  ---deloma11            
+			 * 						----deloma_11_1
+			 * 									  	-----delomaText2.txt
+			 *   					----delomaText3.txt
+			 */
+				 
+			//create Folder H:\\test\\deloma\\deloma_11
+			Ordner deloma11 = TestUtil.getOrdner("H:\\test\\deloma\\deloma_11" , ordSet);
+			File folderDeloma11 = new File(deloma11.getPfad());
+			TestUtil.createSysFolder(folderDeloma11);	
+			
+				//create Folder H:\\test\\deloma\\deloma_11\\deloma11_1
+				Ordner deloma11_1 = new Ordner("H:\\test\\deloma\\deloma_11\\deloma11_1");
+				File folderDeloma11_1 = new File(deloma11_1.getPfad());
+				TestUtil.createSysFolder(folderDeloma11_1);
+
+					//create File H:\\test\\deloma\\deloma_11\\deloma11_1\\delomaText2.txt
+					File delomaText2 = new File("H:\\test\\deloma\\deloma_11\\deloma11_1\\delomaText2.txt");
+					TestUtil.createSysFile(delomaText2);
+				
+				//create File H:\\test\\deloma\\deloma_11\\delomaText3.txt
+				File delomaText3 = new File("H:\\test\\deloma\\deloma_11\\delomaText3.txt");
+				TestUtil.createSysFile(delomaText3);
+			
+			/*
+			 * Third scenario:
+			 *  -H: 
+			 * 	  --deloma
+			 *  		  ---deloma12 (false)			
+		 	 * 						 ----delomaText4.txt dff
+			 */
+			//create Folder H:\\test\\deloma\\deloma_12
+			Ordner deloma12 = TestUtil.getOrdner("H:\\test\\deloma\\deloma_12" , ordSet);
+			File fileDeloma12 = new File(deloma12.getPfad());
+			TestUtil.createSysFolder(fileDeloma12);
+			
+				//create File H:\\test\\deloma\\deloma_12\\delomaText4.txt
+				File delomaText4 = new File("H:\\test\\deloma\\deloma_12\\delomaText4.txt");
+				TestUtil.createSysFile(delomaText4);
+		
 			 testerDao.deleteFiles();
 			 
+			// test delete deloma_10 		 
 			 Assert.assertEquals(false , delomaText1.exists());
 			 
 			 Assert.assertEquals(true , folderDeloma10.exists());
 
-			 Assert.assertEquals(true , folderDeloma.exists());
-				
-		/*
-		 * Second scenario:
-		 *  -H: 
-		 * 	  --deloma
-		 * 			  ---deloma11            
-		 * 						----deloma_11_1
-		 * 									  	-----delomaText2.txt
-		 *   					----delomaText3.txt
-		 */
-		//create Folder H:\\test\\deloma\\deloma_11
-		Ordner deloma11 = TestUtil.getOrdner("H:\\test\\deloma\\deloma_11" , ordSet);
-		File deloma11File = new File(deloma11.getPfad());
-		TestUtil.createSysFolder(deloma11File);	
-		
-			//create Folder H:\\test\\deloma\\deloma_11\\deloma11_1
-			Ordner deloma11_1 = new Ordner("H:\\test\\deloma\\deloma_11\\deloma11_1");
-			File deloma11_1File = new File(deloma11_1.getPfad());
-			TestUtil.createSysFolder(deloma11_1File);
+			// test delete deloma_11 		 
+			 Assert.assertEquals(false , folderDeloma11_1.exists());
 
-				//create File H:\\test\\deloma\\deloma_11\\deloma11_1\\delomaText2.txt
-				File delomaText2 = new File("H:\\test\\deloma\\deloma_11\\deloma11_1\\delomaText2.txt");
-				TestUtil.createSysFile(delomaText2);
-			
-			//create File H:\\test\\deloma\\deloma_11\\delomaText3.txt
-			File fileDelomaText3 = new File("H:\\test\\deloma\\deloma_11\\delomaText3.txt");
-			TestUtil.createSysFile(fileDelomaText3);
-			
-			// test delete deloma_11 
-			 testerDao.deleteFiles();
+			 Assert.assertEquals(false , delomaText3.exists());
 			 
-			 Assert.assertEquals(false , delomaText2.exists());
-			 
-			 Assert.assertEquals(false , deloma11_1File.exists());
-
-			 Assert.assertEquals(false , fileDelomaText3.exists());
-			 
-			 Assert.assertEquals(true , deloma11File.exists());
-			 
-			 Assert.assertEquals(true , folderDeloma.exists());
-
-		/*
-		 * Third scenario:
-		 *  -H: 
-		 * 	  --deloma
-		 *  		  ---deloma12 (false)			
-	 	 * 						 ----delomaText4.txt dff
-		 */
-		//create Folder H:\\test\\deloma\\deloma_12
-		Ordner deloma12 = TestUtil.getOrdner("H:\\test\\deloma\\deloma_12" , ordSet);
-		File deloma12File = new File(deloma12.getPfad());
-		TestUtil.createSysFolder(deloma12File);
-		
-			//create File H:\\test\\deloma\\deloma_12\\delomaText4.txt
-			File delomaText4 = new File("H:\\test\\deloma\\deloma_12\\delomaText4.txt");
-			TestUtil.createSysFile(delomaText4);
-			
-			// test delete deloma_10 
-			 testerDao.deleteFiles();
-			 
+			 Assert.assertEquals(true , folderDeloma11.exists());
+			 	
+			// test delete deloma_10  
 			 Assert.assertEquals(true , delomaText4.exists());
 			 
 			 Assert.assertEquals(true , folderDeloma10.exists());
-
+	
 			 Assert.assertEquals(true , folderDeloma.exists());
-	
-	
-		// clear			 
+			 
+		// clear	 (not work!)		 
 		TestUtil.deleteSysFile(folderDeloma);
 	}
 }

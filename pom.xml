@@ -21,7 +21,7 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
-                    <mainClass>Main</mainClass>
+                    <mainClass>src.de.deloma.tools.filedeleter.Main</mainClass>
         </configuration>
       </plugin>
       <plugin>

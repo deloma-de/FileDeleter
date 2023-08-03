@@ -4,6 +4,7 @@ import java.io.File;
 
 
 
+
 import java.net.URL;
 
 import java.util.Iterator;
@@ -27,6 +28,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.util.StringConverter;
@@ -45,11 +48,10 @@ public class Controler implements Initializable
 	/**
 	 * Path of the config file
 	 */
+	
+	static Node nodeImage; 
+  	 
 	private final static String CONFIG = "config.txt";
-
-	
-	
-	
 	
 	private static DirectoryChooser dChooser;
 
@@ -79,10 +81,14 @@ public class Controler implements Initializable
 	 */
 	private void initTreeView()
 	{
+	Image folder = 	new Image( getClass().getResourceAsStream("img/warn_icon.png"));
+		 
+	
 		this.removeButton.setDisable(true);
 
 		OrdnerDaoImpl dao = new OrdnerDaoImpl(Controler.CONFIG);
 
+		
 		this.isAnyCheckBoxSelected();
 
 		final Set<Ordner> ordSet = dao.getAllOrdner();
@@ -134,10 +140,20 @@ public class Controler implements Initializable
 	            if (empty || ordner == null) {
 	                setText(null);
 	            } else {
-	            	
-	                TreeItem<Ordner> item = this.getTreeItem();	               
-		            	   
+
+	                TreeItem<Ordner> item = this.getTreeItem();	      
+	                 
+	                String parentPath = item.getParent().getValue().toString();
 	               // ordner.setConfig(item.isLeaf() ? true : false);
+	                
+
+	                
+	                if(!TreeUtils.checkFolderExistence(item.getValue().toString() )) {
+	                	
+		                // set icon
+		                setGraphic( new ImageView(folder));
+		                
+	                }
 	                
 	                setFont(Font.font(null, (item.isLeaf() ? FontWeight.BOLD : FontWeight.NORMAL) , USE_PREF_SIZE));
 	                
@@ -148,25 +164,20 @@ public class Controler implements Initializable
 	                if(!(item.getParent() == null)) {	     	
 	                	
 	                	if(!(item.getParent().getValue().toString().equals(""))) {
-	                	
-	                		String parentPath = item.getParent().getValue().toString()+"\\" ;  
-	                		String fullPath =  item.getValue().toString() ;  
-	        	         
-	        	         setText(TreeUtils.getRelativePath(parentPath, fullPath));
-	                	} 
-	                	
-	                	
-	                	 /*  if(!(item.getParent().getValue().toString().equals(""))) 
-	                	   {
-	 	            	   setText(ordner.getName());
-	                		}	 */
-	                	 
-	                }       
 
-	                  	       
-	                  	
-	                /*      System.out.println("item : " +item);
-	                System.out.println("item.getChildren : " +item.getChildren());
+	                		String fullPath =  item.getValue().toString();
+	        	         
+	        	         setText(TreeUtils.getRelativePath(parentPath+"\\", fullPath));
+	        	         
+	        //	         System.out.println("item : " + TreeUtils.getRelativePath(parentPath+"\\", fullPath)) ;
+	                	} 
+	                }       
+	                
+	             //   System.out.println( "     Existence    : " +TreeUtils.checkFolderExistence("H:\\test")) ;
+	                
+	                
+	                System.out.println("item : " + item.getValue().toString() + "     Existence    : " +TreeUtils.checkFolderExistence(parentPath)) ;
+	                 /*      System.out.println("item.getChildren : " +item.getChildren());
 	                System.out.println("isLeaf : " +item.isLeaf());
 	                System.out.println("getParent().getValue() : " + item.getParent().getValue());
 	                System.out.println("getParent().isConfig() : " + item.getValue().isConfig());         
@@ -229,6 +240,9 @@ public class Controler implements Initializable
 				
 				if (ordner.equals(fullPathOrdner))
 					ordnerItem.setSelected(ordner.isActive());
+				
+				
+				
 				
 				parentItem.getChildren().add(ordnerItem);
 				

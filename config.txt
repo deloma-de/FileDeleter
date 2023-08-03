@@ -1,4 +1,6 @@
+false,f:\ccvcv\test2
 false,G:\deloma\deloma_2
 false,G:\test1
-true,H:\test\deloma
-true,H:\test\test2
+true,H:\test\deloma\deloma_11
+false,H:\test\test2
+false,m:\dfdf\tesfdfdt2

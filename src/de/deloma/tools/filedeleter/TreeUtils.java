@@ -1,5 +1,7 @@
 package de.deloma.tools.filedeleter;
 
+import java.io.File;
+
 import javafx.scene.control.TreeItem;
 
 /**
@@ -49,9 +51,20 @@ public class TreeUtils
 
 	        if (relativePath.startsWith("\\") ) {
 	            relativePath = relativePath.substring(1);
+	            
 	        }
 	        
 	        return relativePath;
 	    }
 
+	    /**
+	     * Checks if a given folder path exists on the system.
+	     *
+	     * @param folderPath The path to the directory to be checked.
+	     * @return true if the specified folder path exists , otherwise false.
+	     */
+	    public static boolean checkFolderExistence(String folderPath) {
+	        File folder = new File(folderPath);
+	        return folder.exists();
+	    }
 }
