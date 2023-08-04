@@ -10,7 +10,7 @@
 <?import javafx.scene.control.CheckBoxTreeItem?>
 <?import javafx.scene.control.cell.CheckBoxTreeCell?>
 
-<AnchorPane prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.deloma.tools.filedeleter.Controler">
+<AnchorPane prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.deloma.filedeleter.Controler">
    <children>
       <SplitPane dividerPositions="0.7516778523489933" layoutY="14.0" orientation="VERTICAL" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>

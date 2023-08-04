@@ -1,4 +1,4 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
 
 import java.io.File;
 
@@ -65,6 +65,6 @@ public class TreeUtils
 	     */
 	    public static boolean checkFolderExistence(String folderPath) {
 	        File folder = new File(folderPath);
-	        return folder.exists();
+	        return folder.exists() ;
 	    }
 }

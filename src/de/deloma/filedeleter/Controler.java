@@ -1,6 +1,7 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
 
 import java.io.File;
+
 
 
 
@@ -25,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
@@ -81,7 +83,7 @@ public class Controler implements Initializable
 	 */
 	private void initTreeView()
 	{
-	Image folder = 	new Image( getClass().getResourceAsStream("img/warn_icon.png"));
+	Image warn = 	new Image( getClass().getResourceAsStream("img/warn_icon.png"));
 		 
 	
 		this.removeButton.setDisable(true);
@@ -147,11 +149,12 @@ public class Controler implements Initializable
 	               // ordner.setConfig(item.isLeaf() ? true : false);
 	                
 
-	                
-	                if(!TreeUtils.checkFolderExistence(item.getValue().toString() )) {
+	               
+	                if(!item.getValue().exists()) {
 	                	
 		                // set icon
-		                setGraphic( new ImageView(folder));
+		                setGraphic(new ImageView(warn));
+		                setTooltip(new Tooltip("Folder does not exists!"));
 		                
 	                }
 	                

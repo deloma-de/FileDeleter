@@ -1,4 +1,4 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
 
 import java.util.Set;
 

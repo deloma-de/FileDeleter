@@ -1,4 +1,4 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -260,7 +260,7 @@ public class OrdnerDaoImpl implements OrdnerDao
 		while (i.hasNext())
 		{
 			final Ordner checkedOrdner = i.next();
-			if (checkedOrdner.isActive() && checkedOrdner.isConfig())
+			if (checkedOrdner.isActive() && checkedOrdner.isConfig() && checkedOrdner.exists())
 			
 				OrdnerDaoImpl.rekursiveDelete(new File(checkedOrdner.getPfad()), 0);
 		}

@@ -1,4 +1,6 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
+
+import java.io.File;
 
 /**
  * Representation of a diractory
@@ -150,6 +152,12 @@ public class Ordner implements Comparable<Ordner>
 	public void setConfig(boolean config) {
 		this.config = config;
 	}
+	
+	 
+    public boolean exists() {
+        File folder = new File(pfad);
+        return folder.exists() && folder.isDirectory() ;
+    }
 
 
 }

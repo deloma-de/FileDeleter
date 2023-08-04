@@ -1,4 +1,4 @@
-package de.deloma.tools.filedeleter;
+package de.deloma.filedeleter;
 
 import javafx.application.Application;
 

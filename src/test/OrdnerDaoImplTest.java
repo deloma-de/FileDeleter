@@ -8,8 +8,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import de.deloma.tools.filedeleter.Ordner;
-import de.deloma.tools.filedeleter.OrdnerDaoImpl;
+
+import de.deloma.filedeleter.Ordner;
+import de.deloma.filedeleter.OrdnerDaoImpl;
 
 
 class OrdnerDaoImplTest {
