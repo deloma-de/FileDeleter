@@ -21,12 +21,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application
 {
-	
-	/*
-	 * test icon TreeItem 
-	 */
-	 Image nodeImage = new Image( getClass().getResourceAsStream("img/folder_icon.png"));
-
 	/**
 	 * main Method
 	 *
@@ -38,12 +32,10 @@ public class Main extends Application
 	{
 		Application.launch(args);
 	}
-
 	/**
 	 * starts the GUI
 	 */
-	
-	@Override
+		@Override
 	public void start(final Stage primaryStage) throws Exception
 	{
 		
@@ -53,38 +45,4 @@ public class Main extends Application
 		primaryStage.setScene(scene);
 		primaryStage.show(); 
 	} 
-	
-/*	 @Override
-	    public void start(Stage primaryStage) {
-	        
-	        TreeItem<String> treeItemRoot = new TreeItem<> ("Root");
-	        
-	        TreeItem<String> nodeItemA = new TreeItem<>("Item A");
-	        TreeItem<String> nodeItemB = new TreeItem<>("Item B");
-	        TreeItem<String> nodeItemC = new TreeItem<>("Item C");
-	        treeItemRoot.getChildren().addAll(nodeItemA, nodeItemB, nodeItemC);
-	        
-	        TreeItem<String> nodeItemA1 = new TreeItem<>("Item A1", 
-	                new ImageView(nodeImage));
-	        
-	        
-	        
-	        TreeItem<String> nodeItemA2 = new TreeItem<>("Item A2", 
-	                new ImageView(nodeImage));
-	        TreeItem<String> nodeItemA3 = new TreeItem<>("Item A3", 
-	                new ImageView(nodeImage));
-	        
-	        nodeItemA.getChildren().addAll(nodeItemA1, nodeItemA2, nodeItemA3);
-	        
-	        TreeView<String> treeView = new TreeView<>(treeItemRoot);
-	        StackPane root = new StackPane();
-	        root.getChildren().add(treeView);
-	        
-	        Scene scene = new Scene(root, 300, 250);
-	        
-	        primaryStage.setTitle("java-buddy.blogspot.com");
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
-	    }
-*/
 }

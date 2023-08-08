@@ -3,7 +3,9 @@ package test;
 import java.io.File;
 import java.io.IOException;
 
-
+/**
+ * @author Amirhossein Vatani 2023
+ */
 public class TestFilesUtils
 {
 	public static final String CONFIG_TEST  = "src/test/config_test.txt";

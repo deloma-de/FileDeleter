@@ -9,7 +9,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 import de.deloma.filedeleter.Ordner;
-
+/**
+ * @author Amirhossein Vatani 2023
+ */
 public class TestUtil {
 
 	public static Ordner getOrdner(String path, Set<Ordner> ordSet) {
